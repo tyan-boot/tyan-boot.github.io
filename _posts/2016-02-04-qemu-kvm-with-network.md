@@ -44,19 +44,18 @@ Tap模式
 
 这里需要你有root权限  
 首先需要安装网桥相关的包,一般叫bridge-utils.这个自己安装- -  
-接下来:
-{% highlight shell %}
-brctl addbr br0
-brctl addif eth0    #这里指定你自己主机的网卡设备
-ip tuntap add mode tap tap0    #创建一个tap设备供虚拟机使用
-brctl addif tap0    #把这个tap0加入到网桥中
-ip link set br0 up    #启用网桥
+接下来:  
 
-dhclient br0    #从网桥获取ip地址
+brctl addbr br0  
+brctl addif eth0    #这里指定你自己主机的网卡设备  
+ip tuntap add mode tap tap0    #创建一个tap设备供虚拟机使用  
+brctl addif tap0    #把这个tap0加入到网桥中  
+ip link set br0 up    #启用网桥  
 
-#下面启动你的QEMU
+dhclient br0    #从网桥获取ip地址  
 
-qemu-system-i386 -enable-kvm -netdev tap,id=net0,ifname=tap0,script=no,downscript=no
-{% endhighlight %}
+\#下面启动你的QEMU  
 
-如果正常的话.就可以食用虚拟机了
+qemu-system-i386 -enable-kvm -netdev tap,id=net0,ifname=tap0,script=no,downscript=no  
+
+如果正常的话.就可以食用虚拟机了  
